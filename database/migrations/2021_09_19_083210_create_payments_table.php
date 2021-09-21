@@ -19,7 +19,7 @@ class CreatePaymentsTable extends Migration
             $table->string('card_no');
             $table->string('hashed_card_no');
             $table->date('date');
-            $table->timestamp();
+            $table->timestamps();
         });
     }
 
