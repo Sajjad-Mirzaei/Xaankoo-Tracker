@@ -30,7 +30,12 @@ Route::group(['prefix'=>'user'],function ()
         Route::post('logout',[AuthController::class,'logout'])->name('logout');
         Route::post('change-password',[AuthController::class,'change'])->name('change.password');
         Route::resource('order',OrderController::class);
-        Route::get('get-order/{order}',[PaymentController::class,'getOrder']);
+
+        Route::group(['prefix'=>'payment'],function (){
+            Route::get('/send-to-gate/{order}',[PaymentController::class,'sendToGate'])->name('payment.gate');
+            Route::post('/callback',[PaymentController::class,'callback'])->name('payment.callback');
+        });
+
         Route::resource('workspace',WorkspaceController::class)->except(['create','edit']);
         Route::resource('activity',ActivityController::class)->except(['create','edit']);
     });

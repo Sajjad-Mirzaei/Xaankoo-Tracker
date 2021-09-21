@@ -17,7 +17,7 @@ class CreatePaymentsTable extends Migration
             $table->string('gate_id');
             $table->string('pay_id');
             $table->string('card_no');
-            $table->string('hashed_card_no');
+            $table->json('data');
             $table->date('date');
             $table->timestamps();
         });
