@@ -1,7 +1,7 @@
 <?php
 
 
-use App\Http\Controllers\Api\V1\User\PaymentController;
+
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\V1\User\AuthController;
@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\V1\User\WorkspaceController;
 use App\Http\Controllers\Api\V1\User\ActivityController;
 use App\Http\Controllers\Api\V1\User\ResetPasswordController;
 use App\Http\Controllers\Api\V1\User\UserActivationController;
+use App\Http\Controllers\Api\V1\User\OrderController;
+use App\Http\Controllers\Api\V1\User\PaymentController;
 
 
 use App\Http\Controllers\Api\V1\Admin\FeatureController;
@@ -27,6 +29,7 @@ Route::group(['prefix'=>'user'],function ()
     Route::group(['middleware'=>['auth:api','verify']],function (){
         Route::post('logout',[AuthController::class,'logout'])->name('logout');
         Route::post('change-password',[AuthController::class,'change'])->name('change.password');
+        Route::resource('order',OrderController::class);
         Route::get('get-order/{order}',[PaymentController::class,'getOrder']);
         Route::resource('workspace',WorkspaceController::class)->except(['create','edit']);
         Route::resource('activity',ActivityController::class)->except(['create','edit']);
