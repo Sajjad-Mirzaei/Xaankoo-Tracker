@@ -26,6 +26,8 @@ Route::group(['prefix'=>'user'],function ()
     Route::post('password/request',[ResetPasswordController::class,'requestCode'])->name('passwords.request');
     Route::post('password/reset',[ResetPasswordController::class,'reset'])->name('passwords.reset');
 
+    Route::post('payment/callback',[PaymentController::class,'callback'])->name('payment.callback');
+
     Route::group(['middleware'=>['auth:api','verify']],function (){
         Route::post('logout',[AuthController::class,'logout'])->name('logout');
         Route::post('change-password',[AuthController::class,'change'])->name('change.password');
@@ -33,7 +35,6 @@ Route::group(['prefix'=>'user'],function ()
 
         Route::group(['prefix'=>'payment'],function (){
             Route::get('/send-to-gate/{order}',[PaymentController::class,'sendToGate'])->name('payment.gate');
-            Route::post('/callback',[PaymentController::class,'callback'])->name('payment.callback');
         });
 
         Route::resource('workspace',WorkspaceController::class)->except(['create','edit']);

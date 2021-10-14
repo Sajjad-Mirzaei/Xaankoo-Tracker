@@ -39,7 +39,7 @@ class PaymentController extends Controller
 
     public $msg;
 
-    public function status_response($status)
+    private function status_response($status)
     {
         switch ($status) {
             case 1:
